@@ -1,0 +1,71 @@
+# True CCIP Training Configuration
+# This configuration file controls all aspects of CCIP training
+
+# Data settings
+data:
+  data_path: "data/dataset_comp_image_spectra.h5"
+  train_indices: "splits/split_train_indices.txt"
+  test_indices: "splits/split_test_indices.txt"
+
+# Model architecture
+model:
+  # Composition encoder
+  composition:
+    vocab_size: 95
+    max_length: 20
+    embedding_dim: 256          # Increased from 128
+    n_layers: 6
+    n_heads: 8
+    dropout: 0.1
+    use_positional_encoding: false  # Disable positional encoding
+  
+  # Image encoder
+  image:
+    encoder_type: "resnet"
+    image_size: 64
+    hidden_dim: 512
+  
+  # Shared projection head (maps both modalities to shared space)
+  projection:
+    output_dim: 512
+    hidden_dim: 512             # Intermediate dimension
+    use_projection_head: true   # Enable projection head for better alignment
+    num_layers: 2               # Number of layers in projection head
+
+# Training settings
+training:
+  batch_size: 64                # Per GPU
+  learning_rate: 3e-4           # Slightly higher LR
+  weight_decay: 0.01
+  num_epochs: 100
+  
+  # Contrastive loss
+  temperature: 0.07             # CLIP default
+  learnable_temperature: true  # Whether to learn temperature
+  
+  # Optimization
+  optimizer: "adamw"
+  lr_scheduler: "cosine_warmup"
+  warmup_epochs: 10
+  min_lr: 1e-6
+  
+  # Regularization
+  grad_clip_norm: 1.0
+  label_smoothing: 0.0
+  
+  # Mixed precision
+  use_amp: true
+
+# Logging and checkpointing
+logging:
+  output_dir: "checkpoints/true_ccip"
+  experiment_name: "true_ccip_v2"
+  save_every: 10
+  eval_every: 5
+  log_every_n_batches: 50
+
+# System settings
+system:
+  num_workers: 8
+  seed: 42
+  find_unused_parameters: false

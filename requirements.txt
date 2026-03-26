@@ -1,0 +1,19 @@
+# Core dependencies
+torch>=2.0.0
+torchvision>=0.15.0
+
+# Data handling
+h5py>=3.8.0
+numpy>=1.21.0
+pyyaml>=6.0
+
+# Image processing
+Pillow>=9.0.0
+
+# Utilities
+tqdm>=4.64.0
+matplotlib>=3.5.0
+
+# Optional: Experiment tracking (uncomment if needed)
+# wandb>=0.13.0
+# tensorboard>=2.10.0

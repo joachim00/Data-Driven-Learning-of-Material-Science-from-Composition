@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "composition-conditioned-diffusion"
+version = "0.1.0"
+description = "Composition-conditioned diffusion model for materials science image generation"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+authors = [
+    {name = "Joachim Czapiński"},
+]
+keywords = ["diffusion", "materials-science", "VAE", "DDPM", "composition", "CCIP"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Chemistry",
+]
+
+dependencies = [
+    "torch>=2.0.0",
+    "torchvision>=0.15.0",
+    "h5py>=3.8.0",
+    "numpy>=1.21.0",
+    "Pillow>=9.0.0",
+    "tqdm>=4.64.0",
+    "matplotlib>=3.5.0",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "wandb>=0.13.0",
+    "tensorboard>=2.10.0",
+]
+
+[project.urls]
+Repository = "https://github.com/username/composition-conditioned-diffusion"
+
+[tool.setuptools.packages.find]
+include = ["sd*", "embedding*"]
